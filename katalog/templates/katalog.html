@@ -28,7 +28,9 @@
       <td align="center">{{data.item_stock}}</td>
       <td align="center">{{data.rating}}</td>
       <td align="left">{{data.description}}</td>
-      <td align="left">{{data.item_url}}</td>
+      <td align="left">
+        <a href="{{data.item_url}}">{{data.item_url}}</a>
+      </td>
     </tr>
     {% endfor %}
   </table>
