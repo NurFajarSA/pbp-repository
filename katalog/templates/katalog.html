@@ -10,7 +10,8 @@
   <h5>Student ID: </h5>
   <p>{{id}}</p>
 
-  <table>
+  <h2>Katalogku</h2>
+  <table border="1" cellspacing="1" cellpadding="6" align="left">
     <tr>
       <th>Item Name</th>
       <th>Item Price</th>
@@ -22,12 +23,12 @@
     {% comment %} Add the data below this line {% endcomment %}
     {% for data in catalog_data %}
     <tr>
-      <th>{{data.item_name}}</th>
-      <th>{{data.item_price}}</th>
-      <th>{{data.item_stock}}</th>
-      <th>{{data.rating}}</th>
-      <th>{{data.description}}</th>
-      <th>{{data.item_url}}</th>
+      <td align="left">{{data.item_name}}</td>
+      <td align="right">{{data.item_price}}</td>
+      <td align="center">{{data.item_stock}}</td>
+      <td align="center">{{data.rating}}</td>
+      <td align="left">{{data.description}}</td>
+      <td align="left">{{data.item_url}}</td>
     </tr>
     {% endfor %}
   </table>
