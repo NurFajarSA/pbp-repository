@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1>My Watchlist</h1>
+
+  <table border="1" cellspacing="1" cellpadding="6" align="left">
+    <tr>
+      <th>Title</th>
+      <th>Watched</th>
+      <th>Rating</th>
+      <th>Release Date</th>
+      <th>Review</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    {% for item in data %}
+    <tr>
+      <td align="left">{{item.title}}</td>
+      <td align="center">{{item.watched}}</td>
+      <td align="center">{{item.rating}}</td>
+      <td align="center">{{item.release_date}}</td>
+      <td align="left">{{item.review}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+ {% endblock content %}
