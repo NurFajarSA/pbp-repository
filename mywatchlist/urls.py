@@ -1,6 +1,9 @@
 from django.urls import path
 
-from mywatchlist.views import show_html, show_json, show_xml
+from mywatchlist.views import show_html  
+from mywatchlist.views import show_xml  
+from mywatchlist.views import show_json 
+
 # TODO: Implement Routings Here
 
 app_name = 'mywatchlist'
