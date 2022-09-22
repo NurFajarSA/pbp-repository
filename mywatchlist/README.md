@@ -8,7 +8,10 @@ Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu 
 [Dalam format JSON](https://katalogku.herokuapp.com/mywatchlist/json)
 
 ## HTML vs XML vs JSON
-
+- JSON lebih ringan dibandingkan dengan HTML dan XML
+- HTML dan XML termasuk markup language. Sedangkan JSON hanya notasi dari sebuah objek.
+- JSON diakses dengan sebuah key. Sedangkan, HTML dan XML bisa diakses dengan DOM.
+- HTML menampilkan dokumen pada browser. Sedangkan JSON dan XML hanya digunakan untuk menyimpan data 
 
 ## Data Delivery
 Dalam mengimplementasikan sebuat platform, data delivery dibutuhkan agar aplikasi bisa memuat data yang paling baru dari data yang tersedia pada server.
