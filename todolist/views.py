@@ -1,15 +1,11 @@
-from django.urls import reverse
-from django.shortcuts import render
 from todolist.models import Task
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth import logout
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
-from django.http import HttpResponseRedirect
-from django import forms
+from todolist.forms import TaskForm
 
 # Create your views here.
 @login_required(login_url='/todolist/login')
@@ -67,16 +63,14 @@ def create_task(request: HttpRequest):
     return render(request, "create_task.html", context)
 
 def update(request, id):
-    task = Task.objects.get(pk=id)
-    task.is_finished = not task.is_finished
-    task.save()
-    return HttpResponseRedirect(reverse("todolist:show_tasks"))
+    if request.method == "POST":
+        task = Task.objects.get(pk=id, user=request.user)    
+        task.is_finished = not task.is_finished
+        task.save()
+    return redirect("todolist:show_tasks")
 
 def delete(request, id):
-    task = Task.objects.get(pk=id)
-    task.delete()
-    return HttpResponseRedirect(reverse("todolist:show_tasks"))
-
-class TaskForm(forms.Form):
-    title = forms.CharField(max_length=100, label="Title")
-    description = forms.CharField(widget=forms.Textarea, label="Description", required=False)
+    if request.method == "POST":
+        task = Task.objects.get(pk=id, user=request.user)
+        task.delete()
+    return redirect("todolist:show_tasks")
