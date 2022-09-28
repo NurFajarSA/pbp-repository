@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1>Todo List</h1>
+  <h4>Username: {{user}}</h4>
+  <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+  <button><a href="{% url 'todolist:create_task' %}">Create a Task</a></button>
+  <br></br>
+  <table border="1" cellspacing="1" cellpadding="6" align="left">
+    <tr>
+      <th>Title</th>
+      <th>Created At</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Delete</th>
+    </tr>
+    {% comment %} Add the data below this line {% endcomment %}
+    {% for task in tasks %}
+    <tr>
+      <td align="left">{{task.title}}</td>
+      <td align="center">{{task.date}}</td>
+      <td align="left">{{task.description}}</td>
+      <td align="center">
+          <form method="POST" action="{% url 'todolist:update' task.id %}">
+          {% csrf_token %}
+          <button type="submit">
+            {% if task.is_finished %} Finished {% else %} Not Finished {% endif %}
+          </button>
+        </form>
+      </td>
+
+      <td>
+        <form method="POST" action="{% url 'todolist:delete' task.id %}">
+          {% csrf_token %}
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+ {% endblock content %}
+
