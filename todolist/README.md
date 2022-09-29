@@ -6,13 +6,13 @@ Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu 
 https://katalogku.herokuapp.com/todolist
 
 ###  Apa kegunaan `{% csrf_token %}` pada elemen `<form>`? Apa yang terjadi apabila tidak ada potongan kode tersebut pada elemen `<form>`?
-apa hayo
+Penggunaan `{% csrf_token %}` bertujuan untuk melindungi web dari serangan Cross Site Request Forgery. CSRF token bekerja dengan mengirimkan token ke client yang kemudian akan dikirimkan kembali pada request selanjutnya. Apabila token tidak sesuai, maka request akan direject. Oleh karena itu, apabila tidak ada potongan kode tersebut pada elemen form, maka akan sangat rentan dari serangan CSRF.
 
-#### Apakah kita dapat membuat elemen `<form>` secara manual (tanpa menggunakan generator seperti `{{ form.as_table }})`? Jelaskan secara gambaran besar bagaimana cara membuat `<form> `secara manual.
-apa hayo
+### Apakah kita dapat membuat elemen `<form>` secara manual (tanpa menggunakan generator seperti `{{ form.as_table }})`? Jelaskan secara gambaran besar bagaimana cara membuat `<form> `secara manual.
+Ya, kita dapat membuat elemen `<form>` secara manual. Pembuatan elemen `<form>` secara manual dapat dilakukan dengan cara menggunakan elemen `<input>` dan menyesuaikan dengan kebutuhan form yang ada di code django.
 
 ### Jelaskan proses alur data dari submisi yang dilakukan oleh pengguna melalui HTML form, penyimpanan data pada database, hingga munculnya data yang telah disimpan pada template HTML.
-apa hayo
+Ketika client memasukan input task baru dan menekan button Create, maka button tersebut akan mengirimkan request POST. `views.py` akan memvalidasi request dan data yang ada, lalu menyimpan data tersebut di database. Setelah itu, `views.py` akan melakukan redirect ke laman show_tasks. Laman show_tasks akan mengambil semua data task client yang ada di database dan menampilkannya kembali.
 
 ## Implementasi
 1.  Membuat suatu aplikasi baru bernama todolist di proyek tugas Django yang sudah digunakan sebelumnya.
@@ -40,4 +40,5 @@ apa hayo
     - Deploy seperti biasa
 
 9. Membuat dua akun pengguna dan tiga dummy data menggunakan model Task pada akun masing-masing di situs web Heroku.
-    - Sudah
+    - username: user1 password: 29Nda9qEcvB7x2a
+    - username: user2 password: 2JFiixkBnn2MDRm
