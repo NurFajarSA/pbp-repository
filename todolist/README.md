@@ -42,3 +42,37 @@ Ketika client memasukan input task baru dan menekan button Create, maka button t
 9. Membuat dua akun pengguna dan tiga dummy data menggunakan model Task pada akun masing-masing di situs web Heroku.
     - username: user1 password: 29Nda9qEcvB7x2a
     - username: user2 password: 2JFiixkBnn2MDRm
+
+#
+# Tugas 5: Web Design Using HTML, CSS, and CSS Framework
+Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
+
+- Apa perbedaan dari Inline, Internal, dan External CSS?
+    > - Inline css berada di dalam elemen dengan atribut `style` dan hanya bisa dipakai di elemen tersebut
+    > - Internal css berada di dalam file html dengan tag `<style>` dan hanya bisa dipakai pada file html tersebut
+    > - External css berada di dalam file `.css` yang diimport ke html dan bisa digunakan untuk semua file yg meng-import css nya
+
+- Apa saja kelebihan dan kekurangan dari masing-masing style?
+    > Tergantung penggunaanya masing masing mempunyai perbedaan dalam lokasi penyimpanannya dan scope penggunaannya
+- Jelaskan tag HTML5 yang kamu ketahui.
+    > Tag `<title>...</title>` 
+    </br>
+    > Tag `<TITLE>` tugasnya adalah memberikan informasi berupa judul dokumen HTML.
+    </br>
+    > Tag `<body>...</body>`
+    </br>
+    > Tag `<BODY>` tugasnya adalah memberikan isi dari suatu dokumen yang akan ditampilkan oleh web browsernya.
+    </br>
+    > Tag `<p>...</p>`
+    > Tag `<P>` tugasnya adalah untuk membuat sebuah paragraf.
+
+- Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+    > - `*` -- Universal selector, match semua elemen.
+    > - `elementname` (contoh: `input`) -- Type selector, memilih suatu tag.
+    > - `.classname` -- Class selector, memilih tag dengan class yang disebut
+    > - `#idname` -- ID selector, memilih elemen yang memiliki ID tersebut
+
+- Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+    > - Saya menggunakan daisyUI dan melakukan instalasi melalui CDN
+    > - Saya melakukan perubahan ui dengan menggunakan daisy ui dan talwind css
+    > - Agar responsive komponen-komponen memanfaatkan class yang ada di talwind css 
