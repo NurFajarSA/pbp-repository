@@ -10,7 +10,7 @@
     <div class="flex-none">
       {% if user.is_authenticated %}
       <div class="navbar-end flex-none">
-        <a class="btn btn-primary">Logout</a>
+        <a class="btn btn-primary" href="{% url 'todolist:logout' %}">Logout</a>
       </div>
       <div class="navbar-end flex-none">
         <a class="btn btn-secondary" href="{% url 'todolist:create_task' %}">Create Task</a>
