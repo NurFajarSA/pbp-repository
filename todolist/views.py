@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from todolist.forms import TaskForm
+from django.core import serializers
 
 # Create your views here.
 @login_required(login_url='/todolist/login')
@@ -74,3 +75,59 @@ def delete(request, id):
         task = Task.objects.get(pk=id, user=request.user)
         task.delete()
     return redirect("todolist:show_tasks")
+
+def create_task(request: HttpRequest):
+    if request.method == "POST":
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = Task(
+                title=form.cleaned_data.get("title"),
+                description=form.cleaned_data.get("description"),
+                user=request.user,
+            )
+            task.save()
+            messages.success(request, "Task Berhasil dibuat!")
+            return redirect("todolist:show_tasks")
+    else:
+        form = TaskForm()
+    context = {'form': form}
+    return render(request, "create_task.html", context)
+
+def update_ajax(request, id):
+    if request.method == "POST":
+        task = Task.objects.get(pk=id, user=request.user)    
+        task.is_finished = not task.is_finished
+        task.save()
+    return redirect("todolist:show_tasks_ajax")
+
+def delete_ajax(request, id):
+    if request.method == "POST":
+        task = Task.objects.get(pk=id, user=request.user)
+        task.delete()
+    return redirect("todolist:show_tasks_ajax")
+
+def add_task(request: HttpRequest):
+    if request.method == "POST":
+        title=request.POST.get("title")
+        description=request.POST.get("description")
+        user=request.user
+        task = Task(
+            title=title,
+            description=description,
+            user=user,
+        )
+        task.save()
+        messages.success(request, "Task Berhasil dibuat!")
+        return HttpResponse(
+            serializers.serialize("json", [task]),
+            content_type="application/json",
+        )
+    return HttpResponse("Invalid method", status_code=405)
+@login_required(login_url='/todolist/login')
+def show_tasks_ajax(request):
+    context = {}
+    return render(request, 'todolist_ajax.html', context)
+
+def show_json(request):
+    data = Task.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
