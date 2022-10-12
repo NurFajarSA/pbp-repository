@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
  {% block content %}
- <div class="container mx-auto">
+ <div class="container mx-auto py-4">
   <h1>Hello, {{user}}!</h1>
+  <div class="navbar-end flex-none py-4">
+    <a class="btn btn-secondary" href="{% url 'todolist:create_task' %}">Create Task</a>
+  </div>
    {% if messages %}
-   <ul class="msg">
+   <ul class="msg py-4">
      {% for message in messages %}
      <div class="alert alert-success shadow-lg">
        <div>
@@ -16,13 +19,14 @@
     </ul>
     {% endif %}
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 py-4">
         {% for task in tasks %}
-        <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card w-108 bg-base-100 shadow-xl">
           <div class="card-body">
 
             <h2 class="card-title">{{task.title}}</h2>
             <p>{{task.description}}</p>
+            <p>{{task.date}}</p>
 
             <div class="card-actions justify-end">
               <form action="{% url 'todolist:update' task.id %}" method="POST">
