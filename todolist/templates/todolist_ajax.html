@@ -4,18 +4,10 @@
  <div class="container mx-auto py-4">
     <h1>Hello, {{user}}!</h1>
     <div class="navbar-end flex-none py-4">
-        <label for="my-modal" class="btn btn-secondary" >Create Task</a>
+        <label for="my-modal" id="create-task-btn"class="btn btn-secondary" >Create Task</a>
     </div>
     {% if messages %}
-    <ul class="msg py-4">
-     {% for message in messages %}
-     <div class="alert alert-success shadow-lg">
-       <div>
-         <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-         <span>{{message}}</span>
-        </div>
-      </div>
-      {% endfor %}
+    <ul class="msg py-4" id="alert">
     </ul>
     {% endif %}
 
@@ -26,7 +18,8 @@
     <input type="checkbox" id="my-modal" class="modal-toggle" />
     <div class="modal" id="form-modal">
         <div class="modal-box">
-            <div class="mx-auto container">
+          <label for="my-modal-3" id="closeBtn" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <div class="mx-auto container">         
                 <h1 class="text-4xl font-bold text-center">Create Task</h1>
                 <div class="rounded-lg p-4 flex flex-col gap-4 mx-auto bg-base-100">
 
@@ -59,7 +52,7 @@
 
 <script>
     function postNew(e) {
-        $('.modal').show();
+      $('.modal').show();
         e.preventDefault()
         const titleTask = $("#title").val()
         const descriptionTask = $("#description").val()
@@ -78,7 +71,17 @@
             data: data, 
             success: () => {
                 fetchData()
-                $('.modal').hide();
+                $('#alert').append(
+                  `
+                  <div class="alert alert-success shadow-lg">
+                  <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    <span>Task Berhasil dibuat!</span>
+                    </div>
+                  </div>
+                  `
+                )
+                $("#form-modal").hide();
             },
             dataType: 'json'
         });
@@ -121,12 +124,12 @@
     }
 
     $(document).ready(function(){
-        $(".modal").on("hidden.bs.modal", function() {
-            $(".modal").html("");
-        });
         $("#createBtn").click(postNew)
+        $("#closeBtn").click(() => {
+            $('.modal').hide();
+        })
         fetchData()
-    });    
+    });     
 </script>
 
 
