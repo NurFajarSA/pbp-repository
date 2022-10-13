@@ -91,6 +91,7 @@
         $.get('/todolist/json', function (todolist) {
             $('#task-card').empty()
             todolist.map((task) => {
+                var is_finished = task.fields.is_finished ? 'Finished' : 'Not Finished'
                 $('#task-card').append(
                     `
                     <div class="card w-108 bg-base-100 shadow-xl">
@@ -104,7 +105,7 @@
                         <form action="/todolist/update_ajax/${task.pk}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-secondary">
-                            {% if task.is_finished %} Finished {% else %} Not Finished {% endif %}
+                              ${is_finished}
                             </button>
                         </form>
 
